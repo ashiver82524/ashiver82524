@@ -1,0 +1,95 @@
+package login_test;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class addtocart {
+
+	public static void main(String[] args) throws InterruptedException {
+		 System.setProperty("webdriver.chrome.driver", "C:\\Users\\shopclues\\Documents\\Bluetooth Folder\\thumbs\\chromedriver.exe");    
+		 WebDriver driver=new ChromeDriver();
+		 driver.get("https://www.flipkart.com/");  
+		 driver.manage().window().maximize();  
+		//driver.findElement(By.xpath("//*[@id=\"container\"]/div/div[1]/div[1]/div[2]/div[3]/div/div")).click();
+		//Thread.sleep(2000);
+		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[2]/div/form/div[1]/input")).sendKeys("9105840685");
+		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[2]/div/form/div[2]/input")).sendKeys("ashi@123");
+		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[2]/div/form/div[4]/button")).click();
+		 //Thread.sleep(2000);
+		 driver.findElement(By.xpath("/html/body/div[2]/div/div/button")).click();
+		 WebElement var = driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div[1]/div[2]/div[2]/form/div/div/input"));
+		 var.sendKeys("toys");
+		 var.sendKeys(Keys.RETURN);
+		 Thread.sleep(4000);
+		 driver.findElement(By.xpath("//*[@id=\"container\"]/div/div[1]/div[1]/div[3]")).click();
+		// driver.findElement(By.xpath("//*[@id=\"container\"]/div/div[3]/div[1]/div[2]/div[1]/div/div/div[2]/div[3]")).click();
+		 //Thread.sleep(4000);
+		 driver.findElement(By.xpath("//*[@id=\"container\"]/div/div[3]/div[1]/div[2]/div[2]/div/div[3]")).click(); 
+		 String windowHandle = driver.getWindowHandle();
+
+		ArrayList tabs = new ArrayList (driver.getWindowHandles());
+		driver.switchTo().window((String) tabs.get(1));
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
+		 js.executeScript("window.scrollBy(0,400)", "");		
+		 driver.findElement(By.xpath("//*[@id=\"container\"]/div/div[3]/div[1]/div[1]/div[2]/div/ul/li[1]/button")).click();
+			Thread.sleep(4000);
+			 WebElement total= driver.findElement(By.xpath("//*[@id=\"container\"]/div/div[2]/div/div/div[2]/div[1]/div/div/div/div[4]/div/span/div"));
+			  String total1=total.getText();
+			  char[] ch = new char[total1.length()];
+			  char[] price = new char[total1.length()];   
+ 			  for (int k = 1; k<total1.length(); k++) {
+		            price[k] = total1.charAt(k);
+		        } 		  
+			  String price1 = String.valueOf(price);
+		      String price2 = price1.trim();  
+		     // System.out.println(price2);
+		      int finalprice= Integer.parseInt(price2);
+		      System.out.println(finalprice);
+			 WebElement product= driver.findElement(By.xpath("//*[@id=\"container\"]/div/div[2]/div/div/div[1]/div/div[2]/div/div[1]/div[1]/span[1]"));
+			 String product1=product.getText();
+			 char[] ab = new char[product1.length()];
+			  char[] price3 = new char[product1.length()];   
+			  for (int i = 1; i<product1.length(); i++) {
+		            price3[i] = product1.charAt(i);
+		        } 		  
+			  String price4 = String.valueOf(price3);
+		      String price5 = price4.trim();  
+		      System.out.println(price5);
+		      driver.switchTo().window((String) tabs.get(0));
+		      WebElement product2= driver.findElement(By.xpath("/html/body/div/div/div[3]/div[1]/div[2]/div[2]/div/div[4]"));
+		      String product3=product2.getText();
+		      char[] cd = new char[product3.length()];
+			  char[] price9 = new char[product3.length()];   
+			  for (int m = 1; m<product3.length(); m++) {
+		            price9[m] = product3.charAt(m);
+		        } 		  
+			  String price10 = String.valueOf(price9);
+		      String price11 = price10.trim();  
+		      System.out.println(price11);
+			 WebElement DC= driver.findElement(By.xpath("//*[@id=\"container\"]/div/div[2]/div/div/div[2]/div[1]/div/div/div/div[3]/span"));
+			 String DC1=DC.getText();
+			 char[] dc = new char[DC1.length()];
+			  char[] price6= new char[DC1.length()];   
+			  for (int j = 1; j<DC1.length(); j++) {
+		            price6[j] = DC1.charAt(j);
+		        } 		  
+			  String price7 = String.valueOf(price6);
+		      String price8 = price7.trim();  
+		      System.out.println(price8);
+		      int sum = Integer.parseInt(price5)+Integer.parseInt(price8)+Integer.parseInt(price11);  
+		      System.out.println("The sum of numbers is: "+sum); 
+		      if(finalprice==sum) {
+		    	  System.out.println("calucation is correct");
+		      }
+		      else {
+		    	  System.out.println("calucation is not correct");
+	}
+}
+}
